@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>울산대학교 식물원</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            height: 100vh;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 스크롤바 숨기기 */
+        .main-section::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .main-section {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .container {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            overflow: auto;
+        }
+
+        h1 {
+            font-size: 4rem;
+            position: absolute;
+            top: 0;
+            left: 2%;
+            margin-top: 10px;
+            z-index: 3;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            position: absolute;
+            top: 0;
+            right: 2%;
+            font-size: 3rem;
+            margin-top: 10px;
+            z-index: 3;
+        }
+
+        nav {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-40%);
+            display: flex;
+            gap: 120px;
+            margin-top: 20px;
+            z-index: 3;
+        }
+
+        nav a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .shape {
+            position: absolute;
+            z-index: 1;
+            cursor: grab;
+            transition: left 0.1s ease, top 0.1s ease;
+        }
+
+        /* 도형 스타일 */
+        #img1{
+            background-image: url('./img/금호.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 10vw;
+        } 
+        #img2{
+            background-image: url('./img/거취옥.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 10vw;
+        }
+        #img3 {
+            background-image: url('./img/대봉룡.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 13vw;
+            height: 13vw;
+        }
+        #img4  {
+            background-image: url('./img/극락조화.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 10vw;
+        }
+        #img5  {
+            background-image: url('./img/안수리움.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 10vw;
+        }
+        #img6 {
+            background-image: url('./img/엔젤트럼펫.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 10vw;
+        }
+        #img7 {
+            background-image: url('./img/몬스테라.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 10vw;
+        }
+        #img8 {
+            background-image: url('./img/피닉스야자.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 13vw;
+            height: 13vw;
+        }
+        #img9 {
+            background-image: url('./img/꽃기린.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 13vw;
+            height: 13vw;
+        }
+        #img10 {
+            background-image: url('./img/화월.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 10vw;
+        }
+        #img11 {
+            background-image: url('./img/덕구리난.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 13vw;
+        }
+        #img12 {
+            background-image: url('./img/켄차야자.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 10vw;
+            height: 13vw;
+        }
+        #img13 {
+            background-image: url('./img/삼척바나나.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 12vw;
+            height: 12vw;
+        }
+        #img14 {
+            background-image: url('./img/소시지트리.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 12vw;
+            height: 12vw;
+        }
+        #img15 {
+            background-image: url('./img/망고.png'); /*배경 이미지 삽입 */
+            background-size: cover; /* 또는 contain */
+            background-position: center; /* 중앙 정렬 */
+            width: 12vw;
+            height: 12vw;
+        }
+
+        /* 버튼 스타일 */
+        .grid-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            background-color: transparent;
+            border: none;
+            color: #000;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 4;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .grid-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* 도형이 정렬될 때 스크롤 가능하도록 설정 */
+        .grid-enabled {
+            overflow: auto; /* 스크롤 활성화 */
+        }
+
+        .container1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            z-index: 1; /* z-index 설정 */
+        }
+        .cactus {
+            width: 100%;
+            height: 100%;
+            background-color: #323232;
+            border-radius: 50%;
+            position: absolute;
+            top: 13px;
+            left: 0;
+        }
+        .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid #323232;
+            transform-origin: center bottom;
+        }
+
+        .flower {
+            background-color: #D33A3A;
+            width: 300px; /* 크기 조정: 원하는 크기로 변경 */
+            height: 210px; /* 크기 조정: 원하는 크기로 변경 */
+            border-radius: 300px / 200px; /* 타원형 설정 */
+            transform: rotate(-60deg); /* 회전 설정: 원하는 각도로 변경 */
+            position: relative; /* 부모의 상대 위치에 따라 배치 */
+            top: 600px; /* 수직 위치 조정 */
+            left: 1000px;
+            z-index: 2; /* z-index 설정 */
+        }
+       
+        .tree {
+            background-color: #656464; /* 색상 설정 */
+            width: 250px; /* 너비 설정 */
+            height: 650px; /* 높이 설정 */
+            transform: rotate(-12deg); /* 회전 설정: 원하는 각도로 변경 */
+            position: relative; /* 부모의 상대 위치에 따라 배치 */
+            top: 550px; /* 수직 위치 조정 */
+            left: 140px;
+            z-index: 2; /* z-index 설정 */
+        }
+
+        .main-section {
+            position: relative; /* relative로 변경 */
+            margin-top: 50vh; /* 원하는 만큼의 margin 추가 */
+            visibility: hidden; /* 처음에 숨기기 */
+        }
+
+        .grid-active .main-section {
+            visibility: visible; /* 정렬된 상태에서 보이게 설정 */
+        }       
+
+        .home-button {
+            position: fixed; /* 항상 고정 */
+            bottom: 20px; /* 아래에서의 거리 */
+            right: 20px; /* 오른쪽에서의 거리 */
+            background-color: #000; /* 배경 색상 */
+            color: #fff; /* 글자 색상 */
+            padding: 10px 20px; /* 패딩 */
+            border: none; /* 테두리 없앰 */
+            border-radius: 100px; /* 모서리 둥글게 */
+            font-size: 1.2rem; /* 글자 크기 */
+            cursor: pointer; /* 커서 모양 변경 */
+            z-index: 4; /* 다른 요소보다 위에 표시 */
+            transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+        }
+
+        .home-button:hover {
+             background-color: #444; /* 호버 시 배경 색상 변경 */
+        }
+
+
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h1>울산대학교<br>식물원</h1>
+        <nav>
+            <a href="#">category</a>
+            <a href="#">info</a>
+            <a href="#">archive</a>
+        </nav>
+        <h2>34호관</h2>
+        <!-- 중앙에 버튼 추가 -->
+        <button class="grid-button">grid</button>
+
+        <!-- 도형 div -->
+        <div class="shape" id="img1"></div>
+        <div class="shape" id="img2"></div>
+        <div class="shape" id="img3"></div>
+        <div class="shape" id="img4"></div>
+        <div class="shape" id="img5"></div>
+        <div class="shape" id="img6"></div>
+        <div class="shape" id="img7"></div>
+        <div class="shape" id="img8"></div>
+        <div class="shape" id="img9"></div>
+        <div class="shape" id="img10"></div>
+        <div class="shape" id="img11"></div>
+        <div class="shape" id="img12"></div>
+        <div class="shape" id="img13"></div>
+        <div class="shape" id="img14"></div>
+        <div class="shape" id="img15"></div>
+    </section>
+
+    <section class="main-section"> <!-- 큰 섹션으로 묶기 -->
+        <div class="container1">
+            <div class="cactus"></div>
+            <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(20deg) translateY(-298px);"></div>
+            <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(80deg) translateY(-298px);"></div>
+            <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(140deg) translateY(-298px);"></div>
+            <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(200deg) translateY(-298px);"></div>
+            <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(260deg) translateY(-298px);"></div>
+            <div class="triangle" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(320deg) translateY(-298px);"></div>
+        </div>
+
+            <div class="flower"></div>
+
+            <div class="tree"></div> <!-- tree 추가 -->
+
+        <div class="home-button">home</div>
+    </section>
+
+    <script>
+        const shapes = document.querySelectorAll('.shape');
+        const followSpeed = 0.05; // 움직임 속도
+        const bounceSpeed = 0.5; // 튕길 때의 속도
+        const mousePosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        const gridRows = 5; // 그리드의 행 수
+        let isGrided = false; // 그리드 상태
+    
+        function initializeShapes() {
+            const positions = [];
+            shapes.forEach((shape, index) => {
+                let posX, posY;
+                let isOverlapping;
+    
+                do {
+                    posX = Math.random() * (window.innerWidth - shape.offsetWidth);
+                    posY = Math.random() * (window.innerHeight - shape.offsetHeight - 100); // 상단 글자 아래에 위치하도록 수정
+                    isOverlapping = false;
+    
+                    for (let i = 0; i < positions.length; i++) {
+                        const [otherX, otherY] = positions[i];
+                        const distance = Math.sqrt(Math.pow(posX - otherX, 2) + Math.pow(posY - otherY, 2));
+                        // 도형의 stroke가 만났을 때 (겹쳤을 때의 거리 기준)
+                        if (distance < (shape.offsetWidth / 2 + shapes[i].offsetWidth / 2)) {
+                            isOverlapping = true;
+                            break;
+                        }
+                    }
+                } while (isOverlapping);
+    
+                positions.push([posX, posY]);
+                shape.style.left = `${posX}px`;
+                shape.style.top = `${posY}px`;
+            });
+        }
+    
+        function moveShapes() {
+            if (!isGrided) { // 그리드 상태가 아닐 때만 이동
+                shapes.forEach(shape => {
+                    let posX = parseFloat(shape.style.left);
+                    let posY = parseFloat(shape.style.top);
+    
+                    const dx = mousePosition.x - posX;
+                    const dy = mousePosition.y - posY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+                    // 마우스와의 거리가 100px 이하일 때만 따라가도록 함
+                    if (distance < 150) {
+                        posX += dx * followSpeed;
+                        posY += dy * followSpeed;
+                        shape.style.left = `${posX}px`;
+                        shape.style.top = `${posY}px`;
+                    }
+    
+                    // 충돌 체크
+                    shapes.forEach(otherShape => {
+                        if (shape !== otherShape) {
+                            const otherPosX = parseFloat(otherShape.style.left);
+                            const otherPosY = parseFloat(otherShape.style.top);
+                            const otherDistance = Math.sqrt(Math.pow(posX - otherPosX, 2) + Math.pow(posY - otherPosY, 2));
+    
+                            // 도형의 stroke가 만났을 때
+                            if (otherDistance < (shape.offsetWidth / 2 + otherShape.offsetWidth / 2)) {
+                                // 튕기기
+                                posX += (shape.offsetWidth / 2 + otherShape.offsetWidth / 2 - otherDistance) * bounceSpeed * (dx > 0 ? -1 : 1);
+                                posY += (shape.offsetWidth / 2 + otherShape.offsetWidth / 2 - otherDistance) * bounceSpeed * (dy > 0 ? -1 : 1);
+                                shape.style.left = `${posX}px`;
+                                shape.style.top = `${posY}px`;
+                            }
+                        }
+                    });
+                });
+            }
+        }
+    
+        function arrangeShapesInGrid() {
+            const shapeTypes = {
+                circle: Array.from(shapes).slice(0, 3),
+                ellipse: Array.from(shapes).slice(3, 6),
+                square: Array.from(shapes).slice(6, 10),
+                rectangle: Array.from(shapes).slice(10, 12),
+                triangle: Array.from(shapes).slice(12, 15),
+            };
+    
+            const rowHeight = 200; // 각 행의 높이
+    
+            // 각 도형을 그리드에 정렬
+            let rowIndex = 0;
+            let colIndex = 0;
+            const shapeWidth = 220; // 도형의 너비 (정사각형 기준)
+    
+            for (const [shapeType, shapesArray] of Object.entries(shapeTypes)) {
+                shapesArray.forEach((shape, index) => {
+                    shape.style.left = `${colIndex * shapeWidth + 50}px`;
+                    shape.style.top = `${rowIndex * rowHeight + 230}px`; // 상단 글자 아래에 위치
+                    colIndex++;
+    
+                    // 그리드 열 수 초과 시 다음 행으로 이동
+                    if (colIndex >= gridRows) {
+                        colIndex = 0;
+                        rowIndex++;
+                    }
+                });
+                rowIndex++; // 다음 행으로 넘어감
+                colIndex = 0; // 열 초기화
+            }
+        }
+    
+        // 스크롤과 .main-section 제어 함수
+        function toggleGridState() {
+            const body = document.body;
+            const mainSection = document.querySelector('.main-section');
+            
+            if (isGrided) {
+                body.style.overflow = 'auto'; // 스크롤 활성화
+                mainSection.style.visibility = 'visible'; // 정렬되면 보이게
+            } else {
+                body.style.overflow = 'hidden'; // 스크롤 비활성화
+                mainSection.style.visibility = 'hidden'; // 흩어지면 숨기기
+            }
+        }
+    
+        document.querySelector('.grid-button').addEventListener('click', function() {
+            isGrided = !isGrided;
+            this.textContent = isGrided ? 'scatter' : 'grid';
+    
+            if (isGrided) {
+                arrangeShapesInGrid();
+            } else {
+                initializeShapes();
+            }
+            toggleGridState(); // 스크롤 및 .main-section 상태 제어
+        });
+    
+        window.addEventListener('mousemove', (e) => {
+            mousePosition.x = e.clientX;
+            mousePosition.y = e.clientY;
+        });
+    
+        // 초기 도형 위치 설정
+        initializeShapes();
+    
+        // 애니메이션 루프 시작
+        function animate() {
+            moveShapes();
+            requestAnimationFrame(animate);
+        }
+    
+        animate();
+
+        document.querySelector('.home-button').addEventListener('click', function() {
+            const nav = document.querySelector('nav'); // nav 요소 선택
+            nav.scrollIntoView({ behavior: 'smooth' }); // nav 위치로 부드럽게 스크롤
+        });
+
+    </script>
+    
+</body>
+</html>
